@@ -1,0 +1,40 @@
+{
+  "name": "electron-vue-python-stack",
+  "version": "1.0.0",
+  "description": "Application cross-platform using Electron + Vue as GUI and Python with flask as Backend",
+  "main": "main.js",
+  "scripts": {
+    "start": "set NODE_ENV=developmment && electron .",
+    "watch": "webpack --watch",
+    "build": "webpack",
+    "package": "webpack -p && electron-packager . app --platform win32 --arch x64 --out build/ --executableName evp --ignore /gui/ --overwrite"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "Vue",
+    "Python",
+    "Flask",
+    "start"
+  ],
+  "author": "Benjamin Beaudoin",
+  "license": "",
+  "devDependencies": {
+    "axios": "^0.20.0",
+    "css-loader": "^4.2.1",
+    "electron": "^9.2.1",
+    "electron-packager": "^15.0.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.10.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.3",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.3",
+    "vue-router": "^3.4.3",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {}
+}
