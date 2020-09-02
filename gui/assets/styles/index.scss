@@ -1,7 +1,11 @@
-@import './vars.scss';
+@import './_vars.scss';
+@use "sass:map";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 *{
+    font-family: 'Roboto';
     box-sizing: border-box;
+    color: $shade-darker;
 }
 html{
     line-height: 1.15;
@@ -10,5 +14,8 @@ html{
 }
 body {
     margin: 0;
+}
+a{
+    text-decoration: none;
 }
 // https://www.color-hex.com/color/27476e

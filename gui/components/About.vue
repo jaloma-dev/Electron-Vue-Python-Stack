@@ -14,7 +14,7 @@ export default {
         }
     },
     mounted: function() {
-        axios.get('/').then(res => this.test = res.data.data)
+        // axios.get('/').then(res => this.test = res.data.data)
     }
 }
 </script>

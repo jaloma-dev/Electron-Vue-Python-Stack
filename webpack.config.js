@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    target: 'electron-renderer',
     mode: 'development',
     entry: './gui/index.js',
     output: {

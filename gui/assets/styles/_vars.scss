@@ -1,0 +1,25 @@
+/** COLORS **/
+$accent:        #eca400;
+$alert:         #AB1C19;
+$shade-darker:  #132337;
+$shade-dark:    #1f3858;
+$shade-medium:  #27476e;
+$shade-light:   #7d90a8;
+$shade-lighter: #e9ecf0;
+
+$colors: (
+    "accent":        $accent,
+    "alert":         $alert,
+    "shade-darker":  $shade-darker,
+    "shade-dark":    $shade-dark,
+    "shade-medium":  $shade-medium,
+    "shade-light":   $shade-light,
+    "shade-lighter": $shade-lighter
+);
+
+:root{
+    @each $name, $hex in $colors {
+        --#{$name}: #{$hex};
+    }
+}
+
