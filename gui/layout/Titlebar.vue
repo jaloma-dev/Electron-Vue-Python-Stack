@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import CloseIcon from '../icons/CloseIcon.vue';
 import MaximizeIcon from '../icons/MaximizeIcon.vue';
 import UnmaximizeIcon from '../icons/UnmaximizeIcon.vue';
@@ -33,26 +33,22 @@ export default {
     },
     data() {
         return {
-            winState: remote.getCurrentWindow().isMaximized() ? UnmaximizeIcon : MaximizeIcon
+            winState: ''
         }
     },
     methods: {
         minimizeWindow: function() {
-            remote.getCurrentWindow().minimize();
+            ipcRenderer.invoke('windowAction', 'minimize');
         },
         toggleStateWindow: function() {
-            let win = remote.getCurrentWindow();
-            if(win.isMaximized()){
-                win.unmaximize();
-                this.winState = MaximizeIcon;
-            } else {
-                win.maximize();
-                this.winState = UnmaximizeIcon;
-            }
+            ipcRenderer.invoke('windowAction', 'toggleMaximizeWindow').then( isMaximized => this.winState = isMaximized ? UnmaximizeIcon : MaximizeIcon);
         },
         closeWindow: function() {
-            remote.getCurrentWindow().close();
+            ipcRenderer.invoke('windowAction', 'close');
         }
+    },
+    mounted(){
+        ipcRenderer.invoke('windowIsMaximized').then(res => this.winState = res ? UnmaximizeIcon : MaximizeIcon)
     }
 }
 </script>

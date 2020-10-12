@@ -4,10 +4,10 @@
   "description": "Application cross-platform using Electron + Vue as GUI and Python with flask as Backend",
   "main": "main.js",
   "scripts": {
-    "start": "set NODE_ENV=developmment && electron .",
-    "watch": "webpack --watch",
-    "build": "webpack",
-    "package": "webpack -p && electron-packager . app --platform win32 --arch x64 --out build/ --executableName evp --ignore /gui/ --overwrite"
+    "start": "set NODE_ENV=production && electron .",
+    "watch": "set NODE_ENV=development && webpack --watch",
+    "build": "set NODE_ENV=production && webpack",
+    "package": "set NODE_ENV=production && webpack -p && node packager.js"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [

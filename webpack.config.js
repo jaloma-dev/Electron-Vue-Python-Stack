@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     target: 'electron-renderer',
-    mode: 'development',
+    mode: process.env.NODE_ENV.trim(),
     entry: './gui/index.js',
     output: {
         path: path.resolve(__dirname, './dist'),

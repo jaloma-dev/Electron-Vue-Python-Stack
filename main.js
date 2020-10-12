@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const childProcess = require('child_process');
 
@@ -11,13 +11,36 @@ function createWindow () {
     autoHideMenuBar: true,
     frame: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
     }
   })
 
   // and load the index.html of the app.
   mainWindow.loadFile('./dist/index.html');
+
+  ipcMain.handle('windowAction', (event, type) => {
+    switch(type){
+      case 'minimize':
+        mainWindow.minimize();
+        break;
+      case 'close':
+        mainWindow.close();
+        break;
+      case 'toggleMaximizeWindow':
+        if(mainWindow.isMaximized()){
+            mainWindow.unmaximize();
+            return false;
+        } else {
+           mainWindow.maximize()
+           return true;
+        }
+        break;
+    }
+  });
+
+  ipcMain.handle('windowIsMaximized', (event) => {
+    mainWindow.isMaximized();
+  })
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -29,18 +52,15 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // call python?
-  if(!process.env.NODE_ENV) process.env.NODE_ENV = 'production';
-  if(process.env.NODE_ENV === 'production'){
-    var file = path.join(__dirname, 'dist', 'server', 'server.exe');
-    childProcess.execFile(file, function(err, data){
-      if(err){
-        console.error(err)
-        return;
-      }
-    });
-  } else {
-    childProcess.spawn('python', ['./api/server.py']);
-  }
+  var file = path.join(__dirname, 'dist', 'server', 'server.exe');
+  console.log(file)
+  childProcess.execFile(file, function(err, data){
+    if(err){
+      console.error(err)
+      return;
+    }
+  });
+
 
   createWindow()
   app.on('activate', function () {

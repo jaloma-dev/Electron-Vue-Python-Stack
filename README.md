@@ -25,7 +25,13 @@ python -m venv env
 ```
 pip install -r requirements.txt
 ```
-5. Build gui and lauch electron app
+
+5. Build Python API
+```
+pyinstaller api/server.py
+```
+
+6. Build gui and lauch electron app
 ```
 npm run build
 npm run start
